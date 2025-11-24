@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> 2 Anos Com meu Amor </title>
+
+    <!-- Fonte Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #fdf2f8, #faf5fc, #fde7ef);
+            color: #663366;
+            overflow-x: hidden;
+        }
+
+        /* Música */
+        audio {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+
+        /* Corações Animados */
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 22px;
+            animation: subir 6s linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes subir {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.6); opacity: 0; }
+        }
+
+        /* Cabeçalho com super gradiente híbrido */
+        header {
+            background: linear-gradient(135deg, #ff7aa8, #d93f7d, #c13584, #b66dff, #ffb3d1);
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3.2rem;
+            font-weight: 700;
+            animation: fadeIn 2s ease;
+        }
+
+        header p {
+            font-size: 1.4rem;
+            margin-top: 10px;
+            opacity: 0.95;
+            animation: fadeIn 2.5s ease;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Galeria com estética premium */
+        .galeria {
+            max-width: 1200px;
+            margin: 60px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 35px;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: linear-gradient(180deg, #ffffff, #fff7fb, #f3e9ff);
+            border-radius: 20px;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.18);
+        }
+
+        .card img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            transition: filter 0.45s ease, transform 0.45s ease;
+            cursor: pointer;
+        }
+
+        .card img.blur {
+            filter: blur(16px) grayscale(10%);
+            transform: scale(1.03);
+        }
+
+        .caption {
+            padding: 18px;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 600;
+            color: #663366;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity 0.35s ease, transform 0.35s ease;
+        }
+
+        .caption.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Timeline multicolor com estilo moderno */
+        .timeline-section {
+            max-width: 900px;
+            margin: 80px auto;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .timeline-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 40px;
+            color: #b32e7b;
+        }
+
+        .timeline {
+            border-left: 4px solid #d93f7d;
+            padding-left: 25px;
+        }
+
+        .event {
+            margin-bottom: 35px;
+            position: relative;
+            font-size: 1.1rem;
+            color: #5b275f;
+        }
+
+        .event::before {
+            content: '❤';
+            position: absolute;
+            left: -35px;
+            top: -4px;
+            font-size: 22px;
+            background: linear-gradient(135deg, #ff7aa8, #d93f7d, #b66dff);
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Rodapé elegante */
+        footer {
+            text-align: center;
+            padding: 35px;
+            background: linear-gradient(135deg, #ffd6e8, #f3dcff, #ffe8f3);
+            margin-top: 60px;
+            font-size: 1.15rem;
+            color: #663366;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Música -->
+    <audio controls autoplay loop>
+        <source src="audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Corações -->
+    <div class="hearts"></div>
+
+    <script>
+        function criarCoracao() {
+            const hearts = document.querySelector('.hearts');
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 4 + Math.random() * 4 + 's';
+            hearts.appendChild(heart);
+
+            setTimeout(() => heart.remove(), 8000);
+        }
+        setInterval(criarCoracao, 400);
+    </script>
+
+<!-- Script para revelar fotos corretamente -->
+<script>
+  // Função de revelar para cards (adiciona listeners)
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.reveal-card');
+    cards.forEach(card => {
+      const img = card.querySelector('img');
+      const caption = card.querySelector('.caption');
+
+      img.classList.add('blur');
+      caption.classList.remove('visible');
+
+      card.addEventListener('click', () => {
+        img.classList.remove('blur');
+        caption.classList.add('visible');
+      });
+    });
+  });
+</script>
+
+<!-- Cabeçalho -->
+<header>
+    <h1>Feliz 2 anos, meu amor! ❤️</h1>
+    <p>Dois anos ao seu lado… e eu quero muitos mais.</p>
+</header>
+
+<!-- Galeria -->
+<section class="galeria">
+    <div class="card reveal-card">
+        <img src="foto1.jpg" class="blur">
+        <p class="caption">Quem diria que esse menino tão simito de papai um dia iria se tornar a pessoa que um dia ia me conhecer e conquistar meu coração. ❤️</p>
+    </div>
+
+    <div class="card reveal-card">
+        <img src="foto2.jpg" class="blur">
+        <p class="caption">Sou muito feliz de ter vc em minha vida, cada momento ao seu lado me deixa feliz e sempre alegre.</p>
+    </div>
+
+    <div class="card reveal-card">
+        <img src="foto3.jpg" class="blur">
+        <p class="caption">Amo o seu cheiro, seu jeito de ser....sua companhia me deixa feliz,um sentimento que e puro e verdadeiro. Quando estou ao seu lado o mundo todo é todos os meus problemas param de existir.</p>
+    </div>
+
+    <div class="card reveal-card">
+        <img src="foto4.jpg" class="blur">
+        <p class="caption">Desde que eu te conheci eu sabia que vc era especial para mim,é tbm porque eu ja queria algo com vc em 2024...ai tudo foi uma questão de ariscar tudo .</p>
+    </div>
+
+    <div class="card reveal-card">
+        <img src="foto5.jpg" class="blur">
+        <p class="caption">Cada momento que vivemos foi muito legal, cada viajem e cada passeio que tivemos juntos. ❤️</p>
+    </div>
+
+    <div class="card reveal-card">
+        <img src="foto6.jpg" class="blur">
+        <p class="caption">Adoro viver dias assim com você, cada momento que agente faz um suposto encontro rsrsrsrsr.</p>
+    </div>
+
+    <div class="card reveal-card">
+        <img src="foto7.jpg" class="blur">
+        <p class="caption">Meu neguinho que eu amo e admiro!</p>
+    </div>
+</section>
+
+<!-- Timeline -->
+<section class="timeline-section">
+    <h2>Feliz 2 anos de Namoro meu amor! 💞</h2>
+    <div class="timeline">
+        <div class="event"><strong>2023:</strong> Nos conhecemos e tudo mudou, Conheci um amigo que eu pela primeira vez podia chamar de amigo. vc foi e ainda e meu melhor amigo,parceiro de vida e meu chapa rsrsrsr.</div>
+        <div class="event"><strong>2024:</strong> Vivemos momentos que guardo no coração, momentos felizes aonde eu estava tentando se aproximar de vc do meu jeitinho kkkk...</div>
+        <div class="event"><strong>2025:</strong> Um ano de muitas historias,alegrias,choros, medos,desepções, reconsiliação... Para mim foi um ano muito cheio de surprezas, eu estava preste a mudar de cidade e n ia ter vc ao meu lado, n so isso mais tbm o medo de vc me trocar por outra pessoa talves melhor ou do seu agrado ou de suas 2 sexualidade, estava inseguro de ir embora por causa de vc. um dedo que vc tvlz tenha colocado em mim dps de tudo que vc ja fez comigo em relação a ver porno, me chamar de palavras que me deixavam mal e até dedo dava pra mim. N só isso mais tbm o fato de minha insegurança de achar que vc n se importava muito comigo em relação a demonstração de afeto, gestos, e outras coisas que eu meio que esperava de vc e n tinha nenhum retorno, hoje em dia melhorou um pouco ate rsrsrsrsr(mais pode melhorar mais) msm eu sendo chato as vezes, sendo frio nas conversas com vc,(meu jeitinho que to melhorando) saiba que eu te amo muito e vc foi a melhor pessoa que apareceu em minha vida desde o dia que eu imaginava ter um Boy Magia pra mim rsrsrsrs vc e muito especial pra mim e esse site feito por mim e meu amigo(GPT) e mais uma demonstração que mesmo sem dinheiro eu posso fazer algo que possa te surpreender e mostrar que eu me importo com vc, espero que tenha gostado... eu fiz pensando em vc e fiz pensando em como vc reagiria a cada palavra verdadeira que eu estou colocando aqui! Te amo meu amor e espero viver muitos anos ao seu lado neguinho!..</div>
+    </div>
+</section>
+
+<footer>
+    Feito com amor, para você Neguinho! ❤️
+</footer>
+
+</body>
+</html>
